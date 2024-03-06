@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>mlkdev/macrotext</title>
+		<style>
+			#macro-text-output {
+				height: 256px;
+				width: 1024px;
+				font-family: monospace;
+				background: #EEE;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="macro-text-output"></div>
+		<input id="macro-text-input" />
+
+		<script>
+
+			const glyphs = {
+				" ": [ "   ", "   ", "   ", "   ", "   " ],
+				".": [ "   ", "   ", "   ", "   ", " ▄ " ],
+				",": [ "   ", "   ", "   ", "   ", " █ " ],
+				"-": [ "   ", "   ", "━━━", "   ", "   " ],
+				"!": [ " █ ", " █ ", " █ ", " ▀ ", " ▄ " ],
+				"?": [ "▄████▄", "▀▀  ██", "  ▄██▀", "  ▀▀  ", "  ██  " ],
+				"_": [ "      ", "      ", "      ", "      ", "▄▄▄▄▄▄" ],
+				"a": [ "▄████▄", "██  ██", "██████", "██  ██", "██  ██" ],
+				"b": [ "█████▄", "██  ██", "█████▀", "██  ██", "█████▀" ],
+				"c": [ "▄█████", "██    ", "██    ", "██    ", "▀█████" ],
+				"d": [ "█████▄", "██  ██", "██  ██", "██  ██", "█████▀" ],
+				"e": [ "██████", "██    ", "████  ", "██    ", "██████" ],
+				"f": [ "██████", "██    ", "████  ", "██    ", "██    " ],
+				"g": [ "▄█████", "██    ", "██  ██", "██  ██", "▀█████" ],
+				"h": [ "██  ██", "██  ██", "██████", "██  ██", "██  ██" ],
+				"i": [ "██", "██", "██", "██", "██" ],
+				"j": [ "    ██", "    ██", "    ██", "██  ██", "▀████▀" ],
+				"k": [ "██  ██", "██ ██ ", "████  ", "██ ██ ", "██  ██" ],
+				"l": [ "██    ", "██    ", "██    ", "██    ", "██████" ],
+				"m": [ "███████▄", "██ ██ ██", "██ ██ ██", "██ ██ ██", "██ ██ ██" ],
+				"n": [ "█████▄", "██  ██", "██  ██", "██  ██", "██  ██" ],
+				"o": [ "▄████▄", "██  ██", "██  ██", "██  ██", "▀████▀" ],
+				"p": [ "█████▄", "██  ██", "█████▀", "██    ", "██    " ],
+				"q": [ "▄████▄", "██  ██", "██  ██", "▀█████", "    ██" ],
+				"r": [ "█████▄", "██  ██", "█████▀", "██  ██", "██  ██" ],
+				"s": [ "▄█████", "██    ", "▀████▄", "    ██", "█████▀" ],
+				"t": [ "██████", "  ██  ", "  ██  ", "  ██  ", "  ██  " ],
+				"u": [ "██  ██", "██  ██", "██  ██", "██  ██", "▀████▀" ],
+				"v": [ "██  ██", "██  ██", "██  ██", "██▄▄██", " ▀██▀ " ],
+				"w": [ "██ ██ ██", "██ ██ ██", "██ ██ ██", "██ ██ ██", "███████▀" ],
+				"x": [ "██  ██", "▀█▄▄█▀", "  ██  ", "▄█▀▀█▄", "██  ██" ],
+				"y": [ "██  ██", "██  ██", "▀█████", "    ██", "█████▀" ],
+				"z": [ "██████", "   ▄██", " ▄██▀ ", "██▀   ", "██████" ]
+			};
+
+			const input_el = document.querySelector( '#macro-text-input' );
+			const output_el = document.querySelector( '#macro-text-output' );
+
+			function RenderText( string ) {
+
+				let output = [ '', '', '', '', '' ];
+
+				string = string.toLowerCase();
+				for( let _i = 0; _i < string.length; _i ++ ) {
+
+					let char = string[ _i ];
+					if( !glyphs.hasOwnProperty( char ) ) continue;
+
+					for( let _ii = 0; _ii < 5; _ii ++ ) {
+						output[ _ii ] += " "+glyphs[ char ][ _ii ];
+					}
+
+				}
+
+				return output.join( '<br/>' );
+
+			}
+
+			input_el.addEventListener( 'keyup', ( e ) => {
+
+				let output_text = RenderText( e.target.value );
+				output_el.innerHTML = output_text.replaceAll( ' ', '&nbsp;' );
+
+			} );
+
+		</script>
+
+	</body>
+
+</html>
