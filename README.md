@@ -1,4 +1,6 @@
 # macrotext
-Converts an input string into an output of ascii text. Great for navigating the Sublime Text code preview panel.
+Converts an input string into ascii text and prints it.
+
+[Live Demo @ Codepen](https://codepen.io/mlkdev/pen/bGJdPXy)
 
 ...

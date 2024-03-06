@@ -17,7 +17,7 @@
 	<body>
 
 		<div id="macro-text-output"></div>
-		<input id="macro-text-input" />
+		<input id="macro-text-input" value="hello" />
 
 		<script>
 
@@ -60,7 +60,7 @@
 			const input_el = document.querySelector( '#macro-text-input' );
 			const output_el = document.querySelector( '#macro-text-output' );
 
-			function RenderText( string ) {
+			function GenerateAscii( string ) {
 
 				let output = [ '', '', '', '', '' ];
 
@@ -80,12 +80,15 @@
 
 			}
 
-			input_el.addEventListener( 'keyup', ( e ) => {
+			function OutputText() {
 
-				let output_text = RenderText( e.target.value );
+				let output_text = GenerateAscii( input_el.value );
 				output_el.innerHTML = output_text.replaceAll( ' ', '&nbsp;' );
 
-			} );
+			}
+
+			input_el.addEventListener( 'keyup', OutputText );
+			OutputText();
 
 		</script>
 
